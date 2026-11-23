@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidade — Consent Radar</title>
+<meta name="description" content="Política de privacidade da extensão Consent Radar: o que é lido, o que é guardado localmente e o que nunca sai do seu navegador.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#content">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <nav aria-label="Navegação principal">
+    <a class="brand" href="index.html">Consent Radar</a>
+    <ul>
+      <li><a href="index.html">Produto</a></li>
+      <li><a href="privacy.html" aria-current="page">Privacidade</a></li>
+      <li><a href="pro.html">Pro</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="content">
+  <h1>Política de Privacidade</h1>
+  <p class="muted">Extensão Consent Radar para o Google Chrome.</p>
+
+  <div class="notice">
+    <strong>Resumo:</strong> o Consent Radar roda inteiramente dentro do seu navegador. Ele não tem servidor próprio,
+    não envia os dados que analisa para o desenvolvedor, e as únicas conexões de rede que faz são para o
+    <em>site que você pediu para analisar</em> ou para o endereço da política de privacidade indicado por esse
+    site (que pode estar em outro domínio) — nunca para um servidor do desenvolvedor.
+  </div>
+
+  <h2>1. Controlador e contato</h2>
+  <p>
+    Controlador: Henrique Almeida Motta, desenvolvedor independente responsável pela extensão Consent Radar.
+    Contato para questões sobre a extensão ou sobre esta política:
+    <a href="mailto:henriqueamotta.dev@gmail.com">henriqueamotta.dev@gmail.com</a>.
+  </p>
+  <p>
+    O desenvolvedor não tem acesso aos dados lidos ou guardados pela extensão durante o diagnóstico — eles ficam
+    só no navegador de quem instalou a extensão (ver seção 4). O contato acima serve para dúvidas sobre o
+    funcionamento da extensão e sobre esta política.
+  </p>
+
+  <h2>2. O que a extensão faz</h2>
+  <p>
+    O Consent Radar analisa, a pedido do usuário (ao clicar no ícone da extensão, ou nos botões "Ver cookies desta
+    página" e "Analisar do zero"), a página que está aberta na aba ativa, procurando sinais de conformidade com a
+    LGPD: presença de uma plataforma de gestão de consentimento (CMP) conhecida, existência de opção de recusar
+    cookies no banner, link para a política de privacidade do site, cookies e scripts de rastreamento conhecidos, e
+    identificação do encarregado (DPO) ou canal de contato do titular na política de privacidade do site analisado.
+  </p>
+  <p>
+    O Consent Radar é uma ferramenta técnica de apoio. Ele aponta, de forma automatizada, indícios observáveis na
+    página e pode apresentar falsos positivos e falsos negativos. Não é um serviço jurídico, não emite parecer e
+    não certifica conformidade com a LGPD. A conformidade de um tratamento de dados depende de análise jurídica
+    do caso concreto.
+  </p>
+
+  <h2>3. Dados tratados e finalidade</h2>
+  <div class="table-scroll">
+    <table>
+      <caption>O que é lido da página analisada e para quê</caption>
+      <thead>
+        <tr>
+          <th scope="col">Dado lido</th>
+          <th scope="col">Como é obtido</th>
+          <th scope="col">Finalidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sinais de CMP (plataforma de consentimento) presentes na página</td>
+          <td>Leitura de variáveis globais e seletores conhecidos no DOM da página</td>
+          <td>Identificar qual CMP o site usa</td>
+        </tr>
+        <tr>
+          <td>Cookies não protegidos por <code>HttpOnly</code>, definidos pela própria página</td>
+          <td><code>document.cookie</code>, lido pelo script injetado na página</td>
+          <td>Comparar nomes de cookies com padrões conhecidos de rastreadores</td>
+        </tr>
+        <tr>
+          <td>URLs de scripts e demais recursos de rede carregados pela página (scripts, pixels, iframes,
+            requisições)</td>
+          <td><code>performance.getEntriesByType("resource")</code> e lista de <code>&lt;script src&gt;</code></td>
+          <td>Comparar domínios contra uma lista local de rastreadores conhecidos; só o <em>nome do fornecedor
+            identificado</em> (ex.: "Google Analytics") é usado depois — a URL completa não é armazenada</td>
+        </tr>
+        <tr>
+          <td>Links da página (texto e destino)</td>
+          <td>Leitura dos elementos <code>&lt;a&gt;</code> do DOM</td>
+          <td>Localizar o link para a política de privacidade do site</td>
+        </tr>
+        <tr>
+          <td>Texto e visibilidade dos elementos clicáveis dentro do banner de consentimento</td>
+          <td>Leitura do DOM, restrita ao contêiner identificado como banner</td>
+          <td>Verificar se existe uma opção de recusar cookies</td>
+        </tr>
+        <tr>
+          <td>Texto da política de privacidade do site analisado</td>
+          <td>Requisição à própria URL da política (ver seção 5) ou leitura do texto renderizado em uma janela
+            dedicada</td>
+          <td>Procurar nome, e-mail e trecho de contexto do encarregado (DPO) ou de um canal de contato do
+            titular</td>
+        </tr>
+        <tr>
+          <td>Cookies primários do site, inclusive os marcados <code>HttpOnly</code> (não visíveis via
+            JavaScript da página)</td>
+          <td><code>chrome.cookies</code>, ao abrir "Ver cookies desta página"</td>
+          <td>Exibir, na tela, nome, domínio, valor, validade e sinalizadores (<code>Secure</code>/
+            <code>HttpOnly</code>) desses cookies no inspetor de cookies</td>
+        </tr>
+        <tr>
+          <td>Cookies de domínios de terceiro contatados pela página (opcional, com permissão explícita)</td>
+          <td><code>chrome.cookies.getAll</code>, só para domínios que a própria página já contatou</td>
+          <td>Exibir, na tela, os mesmos dados acima para esses cookies de terceiro</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    O valor dos cookies é exibido apenas na tela, dentro do inspetor de cookies — ele nunca é salvo em nenhum
+    armazenamento da extensão (ver seção 4).
+  </p>
+
+  <h2>4. Armazenamento local — o que é guardado, onde e por quanto tempo</h2>
+  <p>Tudo o que a extensão guarda fica no armazenamento local do seu próprio navegador (nunca em um servidor):</p>
+  <div class="table-scroll">
+    <table>
+      <caption>Dados persistidos pela extensão</caption>
+      <thead>
+        <tr>
+          <th scope="col">Dado</th>
+          <th scope="col">Onde</th>
+          <th scope="col">Retenção</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Histórico de diagnósticos — cada entrada registra o domínio analisado, a data e o horário da
+            análise, a CMP detectada, se havia opção de recusar, se a política de privacidade foi encontrada,
+            cookies e scripts de rastreamento identificados (apenas o nome do fornecedor, nunca a URL completa), e
+            o contato do encarregado/canal encontrado na política do site (nome, e-mail e trecho de texto onde foi
+            encontrado)</td>
+          <td><code>chrome.storage.local</code></td>
+          <td>Até 30 diagnósticos por domínio. Entradas com mais de 12 meses nunca aparecem na tela nem na
+            exportação em CSV, mesmo antes da limpeza automática — que também as apaga do armazenamento, a cada
+            vez que o navegador é aberto ou a extensão é instalada/atualizada</td>
+        </tr>
+        <tr>
+          <td>Cache do contato do encarregado (DPO) por domínio</td>
+          <td><code>chrome.storage.local</code></td>
+          <td>15 dias; apagado automaticamente após expirar, no mesmo gatilho acima</td>
+        </tr>
+        <tr>
+          <td>Resultado do diagnóstico da aba atualmente aberta</td>
+          <td><code>chrome.storage.session</code></td>
+          <td>Até a aba ser fechada ou o navegador reiniciar — este tipo de armazenamento não é salvo em disco</td>
+        </tr>
+        <tr>
+          <td>Ação de permissão pendente (uso interno, técnico, para retomar uma ação após o usuário responder a
+            um diálogo de permissão)</td>
+          <td><code>chrome.storage.session</code></td>
+          <td>60 segundos, ou até ser consumida na próxima abertura do ícone da extensão</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    O valor de cookies exibido no inspetor de cookies não entra em nenhuma dessas tabelas de armazenamento — ele
+    existe apenas na tela, enquanto a página do inspetor estiver aberta.
+  </p>
+  <p>
+    A página de histórico também permite exportar os dados da tabela acima em um arquivo CSV. Essa exportação
+    gera o arquivo diretamente no computador do usuário, por iniciativa dele (botão "Exportar CSV") — a partir do
+    momento em que o arquivo é salvo, ele fica sob a responsabilidade de quem o gerou, assim como qualquer outro
+    arquivo baixado no computador.
+  </p>
+
+  <h2>5. Requisições de rede feitas pela extensão</h2>
+  <p>A extensão faz requisições de rede próprias em dois casos, sempre para o site analisado ou para o endereço da
+    política de privacidade indicado por ele — nunca para um servidor do desenvolvedor:</p>
+  <ul>
+    <li>
+      <strong>Busca rápida da política de privacidade:</strong> a extensão faz uma requisição direta
+      (<code>fetch</code>) à URL da política de privacidade do site analisado (ou à própria página, se ela já for
+      a política), para procurar o nome e e-mail do encarregado. Quando essa política está em um domínio
+      diferente do da aba, a extensão pede sua permissão para acessar esse domínio antes de fazer a requisição.
+    </li>
+    <li>
+      <strong>Busca renderizada, em segundo plano:</strong> só roda quando o usuário clica no botão "Verificar na
+      versão renderizada", exibido quando a busca rápida não encontrou nada (comum em sites que montam a política
+      via JavaScript). Antes de abrir a janela, a extensão pede sua permissão para acessar o domínio da política.
+      Com a permissão concedida, abre uma janela minimizada — sempre em modo anônimo — navega até a URL da
+      política, lê o texto já renderizado e fecha a janela. Sem a configuração "Permitir no modo anônimo" ativada
+      para a extensão (em <code>chrome://extensions</code>), esta busca não roda, e o resultado fica como "não
+      verificado".
+    </li>
+  </ul>
+  <p>
+    A leitura de cookies (seção 3) usa a API <code>chrome.cookies</code> para consultar o próprio navegador — não
+    é uma requisição de rede feita pela extensão.
+  </p>
+
+  <h2>6. O que a extensão nunca faz</h2>
+  <ul>
+    <li>Não envia os dados lidos ou armazenados para nenhum servidor do desenvolvedor — não existe esse servidor.</li>
+    <li>Não usa analytics, pixels de rastreamento ou qualquer SDK de terceiro dentro da própria extensão.</li>
+    <li>Não vende, aluga ou compartilha os dados lidos durante o diagnóstico com nenhum terceiro.</li>
+    <li>Não lê dados de abas além daquela que você pediu para analisar, exceto na busca renderizada do encarregado
+      (seção 5), e mesmo assim só na janela aberta especificamente para ler a política de privacidade do site
+      analisado.</li>
+  </ul>
+
+  <h2>7. Permissões solicitadas</h2>
+  <div class="table-scroll">
+    <table>
+      <caption>Permissões do manifesto da extensão</caption>
+      <thead>
+        <tr>
+          <th scope="col">Permissão</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Quando é pedida</th>
+          <th scope="col">Para quê</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>activeTab</code></td>
+          <td>Obrigatória</td>
+          <td>A cada clique no ícone da extensão</td>
+          <td>Acesso temporário à aba ativa, válido até ela navegar para outra página ou ser fechada — permite
+            rodar o diagnóstico sem pedir acesso permanente a todos os sites visitados</td>
+        </tr>
+        <tr>
+          <td><code>scripting</code></td>
+          <td>Obrigatória</td>
+          <td>Junto com o acesso concedido pela <code>activeTab</code> ou por uma origem específica</td>
+          <td>Injetar o leitor de diagnóstico na página analisada</td>
+        </tr>
+        <tr>
+          <td><code>storage</code></td>
+          <td>Obrigatória</td>
+          <td>Sempre disponível</td>
+          <td>Guardar histórico e cache localmente (seção 4) — nunca em um servidor</td>
+        </tr>
+        <tr>
+          <td><code>cookies</code></td>
+          <td>Opcional</td>
+          <td>No clique em "Ver cookies desta página", ou ao incluir domínios de terceiro na página do inspetor</td>
+          <td>Ler cookies via a API do navegador, inclusive os que não aparecem no DOM da página</td>
+        </tr>
+        <tr>
+          <td><code>browsingData</code></td>
+          <td>Opcional</td>
+          <td>No clique em "Analisar do zero", após confirmação</td>
+          <td>Limpar cookies, armazenamento local, IndexedDB, cache e service workers do site analisado, para
+            simular a visita de um usuário que ainda não deu nenhum consentimento</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Acesso a um domínio específico (nunca a "todos os sites") é pedido, em um gesto do usuário, nestas situações:</p>
+  <ul>
+    <li>"Ver cookies desta página" — domínio da própria aba.</li>
+    <li>"Analisar do zero" — domínio da própria aba, junto com a permissão <code>browsingData</code>.</li>
+    <li>"Conceder acesso e verificar" — domínio da política de privacidade, quando diferente do da aba.</li>
+    <li>"Verificar na versão renderizada" — domínio da política de privacidade.</li>
+    <li>"Incluir cookies de terceiros", no inspetor de cookies — os domínios de terceiro que a própria página já
+      contatou.</li>
+  </ul>
+  <p>
+    <strong>Persistência:</strong> o acesso concedido a um domínio permanece até você revogá-lo em
+    <code>chrome://extensions</code> → Consent Radar → "Detalhes". Exceção: o acesso aos domínios de terceiro
+    pedido no inspetor de cookies é devolvido automaticamente pela extensão logo depois da leitura, sem precisar
+    de nenhuma ação sua.
+  </p>
+  <p>
+    A busca renderizada do encarregado (seção 5) também depende da configuração "Permitir no modo anônimo",
+    disponível para qualquer extensão em <code>chrome://extensions</code> → Consent Radar → "Detalhes" — ela é
+    controlada pelo próprio Chrome, não pela extensão, e só você pode ativá-la.
+  </p>
+
+  <h2>8. Seus direitos como titular de dados</h2>
+  <p>
+    Os dados guardados pela extensão (histórico e cache) ficam apenas no seu navegador e nunca são enviados ao
+    desenvolvedor, que não tem acesso a eles. Você pode, a qualquer momento: consultá-los na página Histórico;
+    exportá-los em CSV; apagar uma entrada ("Remover") ou todas ("Limpar tudo"); ou eliminar tudo desinstalando a
+    extensão. Dúvidas sobre esses dados podem ser enviadas ao contato da seção 1.
+  </p>
+  <p>
+    Se você enviar uma mensagem ao contato da seção 1, os dados dessa comunicação (como nome e e-mail) serão
+    usados apenas para respondê-la. Sobre esses dados, você pode exercer os direitos previstos no art. 18 da LGPD
+    pelo mesmo contato. A lista de espera do Consent Radar Pro tem aviso de privacidade próprio, exibido no
+    formulário.
+  </p>
+
+  <h2>9. Como apagar o histórico e desinstalar a extensão</h2>
+  <ul>
+    <li>
+      <strong>Apagar uma entrada do histórico:</strong> na página "Histórico" da extensão, clique em "Remover" na
+      linha correspondente.
+    </li>
+    <li>
+      <strong>Apagar todo o histórico:</strong> na página "Histórico", clique em "Limpar tudo" e confirme.
+    </li>
+    <li>
+      <strong>Exportar o histórico antes de apagar:</strong> na página "Histórico", clique em "Exportar CSV" — o
+      arquivo gerado fica salvo no seu computador, sob sua responsabilidade, mesmo depois de o histórico ser
+      apagado na extensão.
+    </li>
+    <li>
+      <strong>Revogar permissões concedidas:</strong> em <code>chrome://extensions</code> → Consent Radar →
+      "Detalhes".
+    </li>
+    <li>
+      <strong>Desinstalar a extensão (remove todos os dados guardados por ela, incluindo histórico e cache):</strong>
+      em <code>chrome://extensions</code>, clique em "Remover" no cartão do Consent Radar, ou clique com o botão
+      direito no ícone da extensão e escolha "Remover extensão".
+    </li>
+  </ul>
+
+  <h2>10. Declaração de Uso Limitado (Chrome Web Store)</h2>
+  <p>
+    O uso das informações acessadas pelo Consent Radar segue a
+    <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" target="_blank" rel="noopener noreferrer">Política de Dados do Usuário da Chrome Web Store</a>,
+    incluindo os requisitos de Uso Limitado (Limited Use). Os dados de navegação são lidos apenas para o
+    diagnóstico solicitado pelo usuário, permanecem no navegador e nunca são vendidos, transferidos a terceiros
+    nem usados para publicidade.
+  </p>
+  <p lang="en">
+    The use of information accessed by Consent Radar adheres to the
+    <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" target="_blank" rel="noopener noreferrer">Chrome Web Store User Data Policy</a>,
+    including the Limited Use requirements.
+  </p>
+
+  <h2>11. Alterações nesta política</h2>
+  <p>
+    Esta política pode ser atualizada caso a extensão passe a tratar dados de forma diferente da aqui descrita. A
+    versão vigente é sempre a publicada nesta página.
+  </p>
+  <p class="muted">Versão desta política: 23 de novembro de 2026. Válida para a versão 0.25.0 da extensão.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <ul>
+      <li><a href="index.html">Produto</a></li>
+      <li><a href="privacy.html">Privacidade</a></li>
+      <li><a href="pro.html">Pro</a></li>
+      <li><a href="mailto:henriqueamotta.dev@gmail.com">Contato</a></li>
+    </ul>
+    <p>
+      Este site não usa cookies de rastreamento nem analytics. Ele é hospedado no GitHub Pages, que registra
+      dados técnicos de acesso (como endereço IP) conforme a
+      <a href="https://docs.github.com/pt/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">política de privacidade do GitHub</a>.
+      A página Pro incorpora o formulário da Tally.
+    </p>
+  </div>
+</footer>
+</body>
+</html>

@@ -242,13 +242,16 @@ footer.site-footer p {
 #waitlist-form {
   display: block;
   width: 100%;
-  min-height: 600px;
+  /* Altura medida com o formulário real (hideTitle=1): ~1086px em 1280px de
+     largura, ~1390px em 375px — valores abaixo incluem uma margem para
+     variação de fonte entre sistemas operacionais. */
+  min-height: 1150px;
   border: 1px solid var(--border);
   border-radius: 6px;
 }
 
 @media (max-width: 480px) {
   #waitlist-form {
-    min-height: 760px;
+    min-height: 1450px;
   }
 }

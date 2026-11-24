@@ -1,7 +1,7 @@
 # Consent Radar — site público
 
-Site institucional da extensão [Consent Radar](https://github.com/henriqueamotta/consent-radar) para o Google
-Chrome. Publicado em https://henriqueamotta.github.io/consent-radar-site/
+Site institucional da extensão Consent Radar para o Google Chrome. Publicado em
+https://henriqueamotta.github.io/consent-radar-site/
 
 ## Páginas
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Consent Radar Pro — lista de espera</title>
-<meta name="description" content="Recursos avançados do Consent Radar, em desenvolvimento: relatório em PDF, histórico ilimitado e mais. Entre na lista de espera.">
+<meta name="description" content="Recursos avançados do Consent Radar, em desenvolvimento: relatório em PDF, histórico ampliado e mais. Entre na lista de espera.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -45,13 +45,8 @@
     </li>
     <li>
       <span class="badge-soon">Em breve</span>
-      <strong>Histórico ilimitado:</strong> sem o limite atual de 30 diagnósticos por domínio nem a expiração
-      automática em 12 meses.
-    </li>
-    <li>
-      <span class="badge-soon">Em breve</span>
-      <strong>Lista completa de rastreadores e cookies:</strong> cobertura mais ampla de fornecedores conhecidos
-      de analytics e publicidade, além da lista atual mantida manualmente.
+      <strong>Histórico ampliado:</strong> mais diagnósticos guardados por domínio, com o prazo de retenção
+      definido por você.
     </li>
   </ul>
 
@@ -68,11 +63,11 @@
   </noscript>
   <iframe
     id="waitlist-form"
-    data-tally-src="https://tally.so/embed/gb9zbD"
+    data-tally-src="https://tally.so/embed/gb9zbD?hideTitle=1"
     title="Formulário de inscrição na lista de espera do Consent Radar Pro"
     loading="lazy"
     width="100%"
-    height="600"
+    height="1150"
     frameborder="0"
     marginheight="0"
     marginwidth="0"
@@ -80,11 +75,13 @@
 
   <script>
     (function () {
+      var ALLOWED_ORIGENS = ["extensao", "site"];
       var params = new URLSearchParams(location.search);
-      var origem = params.get("origem") || "site";
+      var requested = params.get("origem");
+      var origem = ALLOWED_ORIGENS.includes(requested) ? requested : "site";
       var iframe = document.getElementById("waitlist-form");
       var base = iframe.getAttribute("data-tally-src");
-      iframe.src = base + "?origem=" + encodeURIComponent(origem);
+      iframe.src = base + "&origem=" + encodeURIComponent(origem);
     })();
   </script>
 </main>

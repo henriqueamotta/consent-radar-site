@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consent Radar Pro — lista de espera</title>
+<meta name="description" content="Recursos avançados do Consent Radar, em desenvolvimento: relatório em PDF, histórico ampliado e mais. Entre na lista de espera.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#content">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <nav aria-label="Navegação principal">
+    <a class="brand" href="index.html">Consent Radar</a>
+    <ul>
+      <li><a href="index.html">Produto</a></li>
+      <li><a href="privacy.html">Privacidade</a></li>
+      <li><a href="pro.html" aria-current="page">Pro</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="content">
+  <h1>Consent Radar Pro</h1>
+  <p class="muted">Recursos avançados para quem avalia conformidade de vários sites — em desenvolvimento.</p>
+
+  <div class="notice">
+    Nenhum dos recursos abaixo está disponível ainda. Não há preço nem data de lançamento definidos — entre na
+    lista de espera para ser avisado quando estiverem prontos.
+  </div>
+
+  <h2>Recursos previstos</h2>
+  <ul class="pro-features">
+    <li>
+      <span class="badge-soon">Em breve</span>
+      <strong>Relatório em PDF datado:</strong> exportação do diagnóstico em um documento com data e hora,
+      pronto para anexar a um parecer ou dossiê de avaliação.
+    </li>
+    <li>
+      <span class="badge-soon">Em breve</span>
+      <strong>Logo da agência no relatório:</strong> personalização do PDF com a identidade visual de quem está
+      conduzindo a avaliação.
+    </li>
+    <li>
+      <span class="badge-soon">Em breve</span>
+      <strong>Histórico ampliado:</strong> mais diagnósticos guardados por domínio, com o prazo de retenção
+      definido por você.
+    </li>
+  </ul>
+
+  <h2>Entre na lista de espera</h2>
+  <p>
+    O formulário abaixo é operado pela <a href="https://tally.so" target="_blank" rel="noopener noreferrer">Tally</a>,
+    um serviço de terceiro independente do Consent Radar.
+  </p>
+  <noscript>
+    <p>
+      <a href="https://tally.so/r/gb9zbD?origem=site" target="_blank" rel="noopener noreferrer">Abrir o formulário
+      da lista de espera</a> (requer JavaScript para carregar embutido nesta página).
+    </p>
+  </noscript>
+  <iframe
+    id="waitlist-form"
+    data-tally-src="https://tally.so/embed/gb9zbD?hideTitle=1"
+    title="Formulário de inscrição na lista de espera do Consent Radar Pro"
+    loading="lazy"
+    width="100%"
+    height="1150"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+  ></iframe>
+
+  <script>
+    (function () {
+      var ALLOWED_ORIGENS = ["extensao", "site"];
+      var params = new URLSearchParams(location.search);
+      var requested = params.get("origem");
+      var origem = ALLOWED_ORIGENS.includes(requested) ? requested : "site";
+      var iframe = document.getElementById("waitlist-form");
+      var base = iframe.getAttribute("data-tally-src");
+      iframe.src = base + "&origem=" + encodeURIComponent(origem);
+    })();
+  </script>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <ul>
+      <li><a href="index.html">Produto</a></li>
+      <li><a href="privacy.html">Privacidade</a></li>
+      <li><a href="pro.html">Pro</a></li>
+      <li><a href="mailto:henriqueamotta.dev@gmail.com">Contato</a></li>
+    </ul>
+    <p>
+      Este site não usa cookies de rastreamento nem analytics. Ele é hospedado no GitHub Pages, que registra
+      dados técnicos de acesso (como endereço IP) conforme a
+      <a href="https://docs.github.com/pt/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">política de privacidade do GitHub</a>.
+      A página Pro incorpora o formulário da Tally.
+    </p>
+  </div>
+</footer>
+</body>
+</html>

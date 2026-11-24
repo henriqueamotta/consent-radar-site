@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consent Radar — diagnóstico de sinais de LGPD em sites</title>
+<meta name="description" content="Extensão para Chrome que verifica, na página visitada, sinais de conformidade com a LGPD: cookies, consentimento e política de privacidade — tudo no seu navegador.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#content">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <nav aria-label="Navegação principal">
+    <a class="brand" href="index.html">Consent Radar</a>
+    <ul>
+      <li><a href="index.html" aria-current="page">Produto</a></li>
+      <li><a href="privacy.html">Privacidade</a></li>
+      <li><a href="pro.html">Pro</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="content">
+  <h1>Consent Radar</h1>
+  <p class="muted">
+    Diagnóstico rápido de sinais de consentimento e cookies na página que você está visitando — pensado para DPOs
+    e agências que avaliam sites de clientes.
+  </p>
+
+  <div class="notice">
+    <strong>Nada sai do seu navegador.</strong> O diagnóstico roda inteiramente no seu Chrome. A extensão não tem
+    servidor próprio e não envia os dados analisados para o desenvolvedor — veja os detalhes na
+    <a href="privacy.html">política de privacidade</a>.
+  </div>
+
+  <h2>O que o Consent Radar verifica</h2>
+  <p>Ao clicar no ícone da extensão, em qualquer página aberta, você recebe um diagnóstico com:</p>
+  <ul>
+    <li>
+      <strong>Plataforma de consentimento (CMP):</strong> se o site usa uma ferramenta conhecida de gestão de
+      consentimento de cookies.
+    </li>
+    <li>
+      <strong>Opção de recusar:</strong> se o banner de consentimento oferece, de forma visível, uma opção para
+      recusar — não só aceitar.
+    </li>
+    <li>
+      <strong>Cookies e scripts de rastreamento:</strong> presença de cookies e scripts de fornecedores conhecidos
+      de analytics e publicidade, incluindo os de terceiros contatados pela página.
+    </li>
+    <li>
+      <strong>Link para a política de privacidade:</strong> se o site expõe, de forma localizável, um link para
+      sua política de privacidade.
+    </li>
+    <li>
+      <strong>Encarregado (DPO) ou canal de contato:</strong> se a política de privacidade identifica um
+      encarregado pelo tratamento de dados ou, na ausência dele, um canal de contato com o titular.
+    </li>
+  </ul>
+  <p>
+    Também é possível inspecionar, em uma página dedicada, cada cookie presente no site (nome, domínio, valor,
+    validade e sinalizadores de segurança), e manter um histórico dos diagnósticos por domínio, exportável em CSV.
+  </p>
+
+  <h2>O que o Consent Radar não faz</h2>
+  <p>
+    O Consent Radar é uma ferramenta técnica de apoio. Ele aponta, de forma automatizada, indícios observáveis na
+    página e pode apresentar falsos positivos e falsos negativos. <strong>Não é um serviço jurídico, não emite
+    parecer e não certifica conformidade com a LGPD.</strong> A conformidade de um tratamento de dados depende de
+    análise jurídica do caso concreto — o Consent Radar serve para apontar, rapidamente, onde essa análise talvez
+    precise de atenção.
+  </p>
+
+  <h2>Baixe a extensão</h2>
+  <p>
+    <span class="store-badge" aria-disabled="true">Em breve na Chrome Web Store</span>
+  </p>
+
+  <h2>Saiba mais</h2>
+  <ul>
+    <li><a href="privacy.html">Política de privacidade</a> — o que é lido, o que é guardado e por quanto tempo.</li>
+    <li><a href="pro.html">Consent Radar Pro</a> — recursos avançados em desenvolvimento, lista de espera aberta.</li>
+  </ul>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <ul>
+      <li><a href="index.html">Produto</a></li>
+      <li><a href="privacy.html">Privacidade</a></li>
+      <li><a href="pro.html">Pro</a></li>
+      <li><a href="mailto:henriqueamotta.dev@gmail.com">Contato</a></li>
+    </ul>
+    <p>
+      Este site não usa cookies de rastreamento nem analytics. Ele é hospedado no GitHub Pages, que registra
+      dados técnicos de acesso (como endereço IP) conforme a
+      <a href="https://docs.github.com/pt/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">política de privacidade do GitHub</a>.
+      A página Pro incorpora o formulário da Tally.
+    </p>
+  </div>
+</footer>
+</body>
+</html>

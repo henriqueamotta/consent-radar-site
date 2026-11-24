@@ -201,3 +201,57 @@ footer.site-footer ul {
 footer.site-footer p {
   margin: 0.25rem 0;
 }
+
+.store-badge {
+  display: inline-block;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6em 1.1em;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.pro-features {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.pro-features li {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+}
+
+.badge-soon {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-radius: 4px;
+  padding: 0.1em 0.6em;
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-right: 0.5em;
+}
+
+#waitlist-form {
+  display: block;
+  width: 100%;
+  /* Altura medida com o formulário real (hideTitle=1): ~1086px em 1280px de
+     largura, ~1390px em 375px — valores abaixo incluem uma margem para
+     variação de fonte entre sistemas operacionais. */
+  min-height: 1150px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+@media (max-width: 480px) {
+  #waitlist-form {
+    min-height: 1450px;
+  }
+}
